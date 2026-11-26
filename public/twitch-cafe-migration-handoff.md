@@ -1,12 +1,12 @@
 # Twitch Cafe — MonstarX Cloud migration handoff
 
-Prepared during this rebuild. This is a migration specification, not a transfer receipt. No records, source identities, credentials, sessions or uploaded files have been transferred. No old backend has been contacted or modified.
+Prepared during this rebuild. This is a migration specification, not a transfer receipt. No application records, source identities, credentials or sessions have been transferred. No old backend has been contacted or modified. On 26 November 2026, the original public café photographs were restored as bundled static assets; this is separate from backend data migration.
 
 ## Source audit and scope
 
 Reference source: twitch-cafe-monstarx.zip (source label only). Inspected original package.json, Vite configuration, gathering implementation, README and source-wide matches for database/provider/environment usage. The source is a public presentation website. It has no ORM, application schema, migration, database provider SDK, accounts, backend API, row-level policies, private uploads, payment provider or stored reservations to translate. Nitro's standard PORT deployment setting is not a database credential. The gathering form only prepares an editable Instagram message and copies it; it neither sends nor stores an enquiry.
 
-The seven original public routes are /, /atelier, /nocturne, /story, /menu, /visit and /gather. Public café facts, menu names, historical collaboration copy and design choices are static content, not migrated activity or account records. Public image binaries were not available through the supplied source reference; the app shows honest unavailable-photo layouts. Fonts use the original families. No public photo placeholders should be interpreted as transferred files.
+The seven original public routes are /, /atelier, /nocturne, /story, /menu, /visit and /gather. Public café facts, menu names, historical collaboration copy and design choices are static content, not migrated activity or account records. Public image binaries were unavailable during the initial rebuild. The 26 November 2026 source amendment restores all 65 supplied crops plus 37 higher-resolution photographs from the original PDF in public/assets/, with provenance and dimensions in src/data/assets.json. Fonts are now bundled locally in the original families. These are public website assets, not private uploaded files or application records.
 
 Managed sign-up, login, account switching/sign-out, forgot-password and token-based reset are added features. Private saved drafts and the identity-mapping table are also new features requested in the rebuild plan, not representations of an existing source backend. There is therefore no original dynamic source-to-target dataset to export. If a different, owner-reviewed dataset is supplied later, establish its scope and mapping before transfer.
 

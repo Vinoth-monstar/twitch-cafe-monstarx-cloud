@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig, type Plugin } from 'vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import viteReact from '@vitejs/plugin-react'
@@ -53,7 +54,14 @@ function tailwindAppSources(): Plugin {
 // /monstarx:tailwind-sources
 
 export default defineConfig({
-  resolve: { tsconfigPaths: true },
+  resolve: {
+    tsconfigPaths: true,
+    alias: [{
+      find: /^lucide-react$/,
+      replacement: fileURLToPath(new URL('./node_modules/lucide-react/dist/esm/lucide-react.mjs', import.meta.url)),
+    }],
+  },
+  ssr: { noExternal: ['lucide-react'] },
   optimizeDeps: { exclude: ['maplibre-gl'] },
   plugins: [tailwindAppSources(), tailwindcss(), tanstackStart(), viteReact()],
 })

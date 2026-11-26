@@ -13,7 +13,7 @@ export const listDrafts = createServerFn({ method: 'GET' }).handler(async () => 
   return await db.select().from(enquiryDrafts).where(and(eq(enquiryDrafts.userId, user.id), isNull(enquiryDrafts.deletedAt))).orderBy(desc(enquiryDrafts.createdAt)).all()
 })
 
-export const inspectDraft = createServerFn({ method: 'GET' }).inputValidator((input: DraftIdInput) => input).handler(async ({ data }) => {
+export const inspectDraft = createServerFn({ method: 'GET' }).validator((input: DraftIdInput) => input).handler(async ({ data }) => {
   const user = await requireUser()
   const checked = validateInput(draftIdInput, data)
   if (!checked.ok) return { error: checked.error }
@@ -22,7 +22,7 @@ export const inspectDraft = createServerFn({ method: 'GET' }).inputValidator((in
   return { draft: draft ?? null }
 })
 
-export const saveDraft = createServerFn({ method: 'POST' }).inputValidator((input: SavedDraftInput) => input).handler(async ({ data }) => {
+export const saveDraft = createServerFn({ method: 'POST' }).validator((input: SavedDraftInput) => input).handler(async ({ data }) => {
   const user = await requireUser()
   const checked = validateInput(savedDraftInput, data)
   if (!checked.ok) return { error: checked.error }
@@ -38,7 +38,7 @@ export const saveDraft = createServerFn({ method: 'POST' }).inputValidator((inpu
   }
 })
 
-export const deleteDraft = createServerFn({ method: 'POST' }).inputValidator((input: DraftIdInput) => input).handler(async ({ data }) => {
+export const deleteDraft = createServerFn({ method: 'POST' }).validator((input: DraftIdInput) => input).handler(async ({ data }) => {
   const user = await requireUser()
   const checked = validateInput(draftIdInput, data)
   if (!checked.ok) return { error: checked.error }

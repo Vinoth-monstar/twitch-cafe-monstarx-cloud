@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig, type Plugin } from 'vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import viteReact from '@vitejs/plugin-react'
@@ -55,7 +56,14 @@ function tailwindAppSources(): Plugin {
 
 // Used by `npm run deploy`: builds the app as a Cloudflare Worker (SSR in workerd).
 export default defineConfig({
-  resolve: { tsconfigPaths: true },
+  resolve: {
+    tsconfigPaths: true,
+    alias: [{
+      find: /^lucide-react$/,
+      replacement: fileURLToPath(new URL('./node_modules/lucide-react/dist/esm/lucide-react.mjs', import.meta.url)),
+    }],
+  },
+  ssr: { noExternal: ['lucide-react'] },
   // Keep MapLibre out of Vite's dependency pre-bundler in dev. The managed <Map> component
   // imports its worker with ?worker&url so published builds emit the worker and its shared module.
   optimizeDeps: { exclude: ['maplibre-gl'] },
