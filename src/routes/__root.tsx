@@ -9,6 +9,7 @@ import {
 import { seoConfig, seoHead } from "@/lib/monstarx/seo";
 import { Site } from "@/components/Site";
 import { AppearanceProvider } from "@/components/AppearanceProvider";
+import { LanguageProvider } from "@/components/LanguageProvider";
 import type { Design } from "@/data/cafe";
 import appCss from "../styles.css?url";
 import cloudCss from "../cloud-features.css?url";
@@ -59,11 +60,13 @@ function RootDocument({ children }: { children: ReactNode }) {
 }
 function RootLayout() {
   return (
-    <AppearanceProvider>
-      <Site>
-        <Outlet />
-      </Site>
-    </AppearanceProvider>
+    <LanguageProvider>
+      <AppearanceProvider>
+        <Site>
+          <Outlet />
+        </Site>
+      </AppearanceProvider>
+    </LanguageProvider>
   );
 }
 function NotFound() {

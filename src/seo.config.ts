@@ -133,8 +133,21 @@ export const seo: SeoConfig = {
     "/visit"
   ],
   "privatePaths": [
+    "/",
     "/account",
-    "/gather"
+    "/atelier",
+    "/forgot-password",
+    "/gather",
+    "/llms.txt",
+    "/login",
+    "/menu",
+    "/nocturne",
+    "/reset-password",
+    "/robots.txt",
+    "/signup",
+    "/sitemap.xml",
+    "/story",
+    "/visit"
   ]
 }
 

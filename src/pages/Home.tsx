@@ -3,8 +3,10 @@ import { Link } from "@tanstack/react-router";
 import { useDesign, useDesignSearch } from "../hooks/use-design";
 import { Eyebrow, PageLink, Photo, Reveal } from "../components/ui";
 import { featured } from "../data/cafe";
+import { useLanguage } from "../components/LanguageProvider";
 
 export function HomePage() {
+  const { t } = useLanguage();
   const design = useDesign();
   const designSearch = useDesignSearch();
   return (
@@ -17,15 +19,15 @@ export function HomePage() {
         <ForestHero />
       )}
       <div className="brand-strip">
-        <span>Thoughtfully brewed.</span>
+        <span>{t('Thoughtfully brewed.')}</span>
         <span className="strip-flower">✳</span>
-        <span>Locally rooted.</span>
+        <span>{t('Locally rooted.')}</span>
         <span className="strip-flower">✳</span>
-        <span>Always a warm welcome.</span>
+        <span>{t('Always a warm welcome.')}</span>
       </div>
       <section className="introduction page-wrap section-space">
         <Reveal>
-          <Eyebrow>A café with a story</Eyebrow>
+          <Eyebrow>{t('A café with a story')}</Eyebrow>
           <h2>
             A little Brisbane.
             <br />A lot of <em>heart.</em>
@@ -50,7 +52,7 @@ export function HomePage() {
       >
         <Reveal className="section-heading">
           <div>
-            <Eyebrow>Made for your everyday</Eyebrow>
+            <Eyebrow>{t('Made for your everyday')}</Eyebrow>
             <h2>
               Find your
               <br />
@@ -98,7 +100,7 @@ export function HomePage() {
             <span className="image-note">A little corner of Section 19.</span>
           </Reveal>
           <Reveal className="space-feature-copy" delay={0.15}>
-            <Eyebrow>Make yourself at home</Eyebrow>
+            <Eyebrow>{t('Make yourself at home')}</Eyebrow>
             <h2>
               Your <br />
               favourite
@@ -126,7 +128,7 @@ export function HomePage() {
       </section>
       <section className="gather-preview page-wrap section-space">
         <Reveal className="gather-preview-copy">
-          <Eyebrow>More than a coffee stop</Eyebrow>
+          <Eyebrow>{t('More than a coffee stop')}</Eyebrow>
           <h2>
             Bring your people.
             <br />
@@ -168,30 +170,26 @@ export function HomePage() {
 }
 
 function ForestHero() {
+  const { t, language } = useLanguage();
   return (
     <section className="hero-forest page-wrap">
       <div className="hero-copy">
-        <Eyebrow>Your neighbourhood café · Petaling Jaya</Eyebrow>
+        <Eyebrow>{t('Your neighbourhood café · Petaling Jaya')}</Eyebrow>
         <h1 className="hero-headline">
-          <span>Good coffee.</span>
-          <span>Better</span>
-          <span>
-            <em>company.</em>
-          </span>
+          {language === 'en' ? <><span>Good coffee.</span><span>Better</span><span><em>company.</em></span></> : <span>{t('Good coffee. Better company.')}</span>}
         </h1>
         <div className="hero-description">
           <span className="small-rule" />
           <p>
-            A little Australia. A little Malaysia.
-            <br />A place to feel right at home.
+            {t('A little Australia. A little Malaysia. A place to feel right at home.')}
           </p>
         </div>
         <div className="hero-actions">
           <PageLink to="/menu" design="forest">
-            Explore the menu
+            {t('Explore the menu')}
           </PageLink>
           <PageLink to="/story" design="forest" secondary>
-            Our story
+            {t('Our story')}
           </PageLink>
         </div>
         <a className="scroll-note" href="#favourites">
@@ -290,6 +288,7 @@ function AtelierHero() {
 }
 
 function NocturneHero() {
+  const { t, language } = useLanguage();
   const designSearch = useDesignSearch();
   return (
     <section className="hero-nocturne">
@@ -302,21 +301,15 @@ function NocturneHero() {
       <div className="nocturne-shade" />
       <div className="nocturne-hero-content page-wrap">
         <div>
-          <Eyebrow light>Good coffee, good company · Section 19</Eyebrow>
+          <Eyebrow light>{t('Good coffee, good company · Section 19')}</Eyebrow>
           <h1>
-            Your daily
-            <br />
-            <em>escape.</em>
+            {language === 'en' ? <>Your daily<br /><em>escape.</em></> : t('Your daily escape.')}
           </h1>
           <p>
-            Step out of the rush.
-            <br />
-            Into a good cup, a familiar face,
-            <br />
-            and a little time for yourself.
+            {t('Step out of the rush. Into a good cup, a familiar face, and a little time for yourself.')}
           </p>
           <PageLink to="/menu" design="nocturne">
-            Discover your usual
+            {t('Discover your usual')}
           </PageLink>
         </div>
         <div className="nocturne-drink">

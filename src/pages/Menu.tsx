@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { ArrowDown } from "lucide-react";
 import { menu } from "@/data/cafe";
 import { Eyebrow, Photo } from "@/components/ui";
+import { useLanguage } from "@/components/LanguageProvider";
 export function MenuPage() {
+  const { t } = useLanguage();
   const { category: selected } = useSearch({ from: "/menu" });
   const navigate = useNavigate({ from: "/menu" });
   const [ready, setReady] = useState(false);
@@ -16,18 +18,18 @@ export function MenuPage() {
     <main id="main" className="menu-page">
       <section className="menu-intro page-wrap">
         <div>
-          <Eyebrow>Your usual, or something new</Eyebrow>
+          <Eyebrow>{t('Your usual, or something new')}</Eyebrow>
           <h1>
-            Good things,
+            {t('Good things,')}
             <br />
-            <em>by the cup.</em>
+            <em>{t('by the cup.')}</em>
             <br />
-            And the plate.
+            {t('And the plate.')}
           </h1>
           <p>
-            From your first coffee to one more slice.
+            {t('From your first coffee to one more slice.')}
             <br />
-            Find something that feels like you.
+            {t('Find something that feels like you.')}
           </p>
           <Link
             to="/menu"
@@ -35,7 +37,7 @@ export function MenuPage() {
             hash="menu-selection"
             className="text-link"
           >
-            Take a look <ArrowDown size={15} />
+            {t('Take a look')} <ArrowDown size={15} />
           </Link>
         </div>
         <div className="menu-intro-photo">
@@ -68,13 +70,12 @@ export function MenuPage() {
               }
               aria-pressed={selected === category.id}
             >
-              {category.label}
+              {t(category.label)}
             </button>
           ))}
         </div>
         <p className="menu-availability">
-          Prepared with care. Selections vary with the day — ask us what’s
-          available.
+          {t('Prepared with care. Selections vary with the day — ask us what’s available.')}
         </p>
         <div aria-live="polite" className="sr-only">
           {selected === "all"
@@ -90,11 +91,11 @@ export function MenuPage() {
             >
               <div className="menu-category-intro">
                 <span className="eyebrow">0{menu.indexOf(category) + 1}</span>
-                <h2 id={`category-${category.id}`}>{category.label}</h2>
-                <p>{category.intro}</p>
+                <h2 id={`category-${category.id}`}>{t(category.label)}</h2>
+                <p>{t(category.intro)}</p>
                 <Photo
                   image={category.image}
-                  alt={`${category.label} at Twitch Cafe`}
+                  alt={`${t(category.label)} at Twitch Cafe`}
                 />
               </div>
               <div className="menu-items">
@@ -109,7 +110,7 @@ export function MenuPage() {
                   ))}
                 </div>
                 {category.note && (
-                  <p className="menu-category-note">{category.note}</p>
+                  <p className="menu-category-note">{t(category.note)}</p>
                 )}
               </div>
             </section>

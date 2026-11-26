@@ -2,16 +2,18 @@ import { MapPin, Sun } from "lucide-react";
 import { cafe } from "../data/cafe";
 import { Eyebrow, ExternalLink, Photo, Reveal } from "../components/ui";
 import { Gallery } from "../components/Gallery";
+import { useLanguage } from "../components/LanguageProvider";
 
 export function VisitPage() {
+  const { t } = useLanguage();
   return (
     <main id="main" className="visit-page">
       <section className="page-title page-wrap">
-        <Eyebrow>Your little corner of Petaling Jaya</Eyebrow>
+        <Eyebrow>{t('Your little corner of Petaling Jaya')}</Eyebrow>
         <h1>
-          Come for a cup.
+          {t('Come for a cup.')}
           <br />
-          Stay for the <em>feeling.</em>
+          {t('Stay for the')} <em>{t('feeling.')}</em>
         </h1>
       </section>
       <section className="visit-location page-wrap">
@@ -26,11 +28,11 @@ export function VisitPage() {
           </span>
         </div>
         <div className="visit-details">
-          <Eyebrow>A warm welcome awaits</Eyebrow>
+          <Eyebrow>{t('A warm welcome awaits')}</Eyebrow>
           <h2>
-            Find us
+            {t('Find us')}
             <br />
-            in <em>Section 19.</em>
+            {t('in')} <em>Section 19.</em>
           </h2>
           <address>
             {cafe.address.map((line) => (
@@ -41,18 +43,17 @@ export function VisitPage() {
             ))}
           </address>
           <ExternalLink href={cafe.maps} button>
-            Get directions
+            {t('Get directions')}
           </ExternalLink>
           <div className="visit-hours">
             <Sun size={20} strokeWidth={1.3} />
             <div>
-              <h3>Planning your visit?</h3>
+              <h3>{t('Planning your visit?')}</h3>
               {cafe.hours ? (
                 cafe.hours.map((line) => <p key={line}>{line}</p>)
               ) : (
                 <p>
-                  For current opening hours and café updates, check our
-                  Instagram before you head over.
+                  {t('For current opening hours and café updates, check our Instagram before you head over.')}
                 </p>
               )}
               <ExternalLink href={cafe.instagram}>@twitchcafe.pj</ExternalLink>
@@ -63,7 +64,7 @@ export function VisitPage() {
       <section className="inside-section page-wrap section-space" id="space">
         <Reveal className="section-heading">
           <div>
-            <Eyebrow>Take a little look around</Eyebrow>
+            <Eyebrow>{t('Take a little look around')}</Eyebrow>
             <h2>
               Find your
               <br />
@@ -80,7 +81,7 @@ export function VisitPage() {
       <section className="delivery-section section-space">
         <div className="page-wrap delivery-grid">
           <Reveal>
-            <Eyebrow>A little Twitch, delivered</Eyebrow>
+            <Eyebrow>{t('A little Twitch, delivered')}</Eyebrow>
             <h2>
               Your favourites.
               <br />
@@ -96,7 +97,7 @@ export function VisitPage() {
               <span>ShopeeFood</span>
             </div>
             <ExternalLink href={cafe.instagram}>
-              Ask us about delivery
+              {t('Ask us about delivery')}
             </ExternalLink>
           </Reveal>
           <Reveal className="delivery-photo" delay={0.1}>

@@ -336,6 +336,9 @@ p {
   gap: 25px;
   font-size: 10px;
 }
+.language-selector { display: inline-flex; align-items: center; color: var(--ink); font-size: 11px; }
+.language-selector select { max-width: 130px; min-height: 40px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); padding: 6px; }
+.mobile-navigation .language-selector { margin-top: 20px; }
 .mobile-toggle {
   display: none;
 }

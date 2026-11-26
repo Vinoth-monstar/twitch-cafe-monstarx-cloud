@@ -6,13 +6,15 @@ import { cafe, designs, navigation } from "@/data/cafe";
 import type { Design } from "@/data/cafe";
 import { ExternalLink, PageLink, Photo } from "./ui";
 import { useAppearance, useDesign, useDesignSearch } from "@/hooks/use-design";
+import { LanguageSelector, useLanguage } from "./LanguageProvider";
 
 export function Site({ children }: { children: ReactNode }) {
   const design = useDesign();
+  const { t } = useLanguage();
   return (
     <div className="site" data-design={design}>
         <a className="skip-link" href="#main">
-          Skip to content
+          {t('Skip to content')}
         </a>
         <Header design={design} />
         {children}
@@ -50,6 +52,7 @@ function AppearanceToggle() {
 }
 
 function Header({ design }: { design: Design }) {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const trigger = useRef<HTMLButtonElement>(null);
   const drawer = useRef<HTMLDivElement>(null);
@@ -60,7 +63,7 @@ function Header({ design }: { design: Design }) {
     const oldOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const focusable = () =>
-      drawer.current?.querySelectorAll<HTMLElement>("a,button:not(:disabled)");
+      drawer.current?.querySelectorAll<HTMLElement>("a,button:not(:disabled),select:not(:disabled)");
     focusable()?.[0]?.focus();
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -113,17 +116,18 @@ function Header({ design }: { design: Design }) {
               search={designSearch}
               activeProps={{ className: "is-active" }}
             >
-              {item.label}
+              {t(item.label)}
             </Link>
           ))}
         </nav>
         <div className="header-actions">
+          <LanguageSelector />
           <Link to="/account" search={designSearch} className="account-link">
-            My account
+            {t('My account')}
           </Link>
           <AppearanceToggle />
           <Link to="/visit" search={designSearch} className="header-visit">
-            Come on over <ArrowUpRight size={16} aria-hidden="true" />
+            {t('Come on over')} <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
         </div>
         <button
@@ -175,14 +179,15 @@ function Header({ design }: { design: Design }) {
               }}
             >
               <span>0{index + 1}</span>
-              {item.label}
+              {t(item.label)}
               <ArrowUpRight size={24} />
             </Link>
           ))}
           <div className="mobile-appearance">
-            <span>Make yourself at home</span>
+            <span>{t('Make yourself at home')}</span>
             <AppearanceToggle />
           </div>
+          <LanguageSelector />
           <p>3 Two Square · Petaling Jaya</p>
         </div>
       )}
@@ -191,17 +196,18 @@ function Header({ design }: { design: Design }) {
 }
 
 function Footer({ design }: { design: Design }) {
+  const { t } = useLanguage();
   return (
     <footer className="site-footer">
       <div className="footer-invitation page-wrap">
         <div>
-          <p className="eyebrow">Your next coffee is waiting</p>
+          <p className="eyebrow">{t('Your next coffee is waiting')}</p>
           <h2>
             See you at <em>Twitch.</em>
           </h2>
         </div>
         <PageLink to="/visit" design={design}>
-          Find your way here
+          {t('Find your way here')}
         </PageLink>
       </div>
       <div className="footer-main page-wrap">
@@ -213,7 +219,7 @@ function Footer({ design }: { design: Design }) {
           </p>
         </div>
         <div>
-          <span className="footer-label">Find us</span>
+          <span className="footer-label">{t('Find us')}</span>
           <address>
             {cafe.address.map((line) => (
               <span key={line}>
@@ -224,7 +230,7 @@ function Footer({ design }: { design: Design }) {
           </address>
         </div>
         <div>
-          <span className="footer-label">Stay connected</span>
+          <span className="footer-label">{t('Stay connected')}</span>
           <ExternalLink href={cafe.instagram}>Instagram</ExternalLink>
           <ExternalLink href={cafe.facebook}>Facebook</ExternalLink>
         </div>
@@ -232,7 +238,7 @@ function Footer({ design }: { design: Design }) {
       <div className="footer-bottom page-wrap">
         <span>© Twitch Cafe</span>
         <span>Independent. Locally rooted. Made with heart.</span>
-        <a href="#main">Back to top ↑</a>
+        <a href="#main">{t('Back to top ↑')}</a>
       </div>
     </footer>
   );
