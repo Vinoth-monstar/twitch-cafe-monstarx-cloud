@@ -6,6 +6,7 @@ import { cafe, designs, navigation } from "@/data/cafe";
 import type { Design } from "@/data/cafe";
 import { ExternalLink, PageLink, Photo } from "./ui";
 import { useAppearance, useDesign, useDesignSearch } from "@/hooks/use-design";
+import { LocalizedMain } from './LocalizedMain';
 import { LanguageSelector, useLanguage } from "./LanguageProvider";
 
 export function Site({ children }: { children: ReactNode }) {
@@ -25,6 +26,7 @@ export function Site({ children }: { children: ReactNode }) {
 }
 
 function AppearanceToggle() {
+  const { t } = useLanguage();
   const { design, ready, setMode } = useAppearance();
   const dark = design === "nocturne";
   return (
@@ -33,11 +35,11 @@ function AppearanceToggle() {
       className="appearance-toggle icon-button"
       role="switch"
       aria-checked={dark}
-      aria-label="Dark mode"
+      aria-label={t('Dark mode')}
       title={
         dark
-          ? "Switch to light mode · Forest"
-          : "Switch to dark mode · Nocturne"
+          ? t('Switch to light mode · Forest')
+          : t('Switch to dark mode · Nocturne')
       }
       disabled={!ready}
       onClick={() => setMode(dark ? "light" : "dark")}
@@ -90,7 +92,7 @@ function Header({ design }: { design: Design }) {
     };
   }, [open]);
   return (
-    <header className="site-header">
+    <LocalizedMain as="header" className="site-header">
       <div className="header-inner">
         <Link
           to={home}
@@ -191,14 +193,14 @@ function Header({ design }: { design: Design }) {
           <p>3 Two Square · Petaling Jaya</p>
         </div>
       )}
-    </header>
+    </LocalizedMain>
   );
 }
 
 function Footer({ design }: { design: Design }) {
   const { t } = useLanguage();
   return (
-    <footer className="site-footer">
+    <LocalizedMain as="footer" className="site-footer">
       <div className="footer-invitation page-wrap">
         <div>
           <p className="eyebrow">{t('Your next coffee is waiting')}</p>
@@ -240,19 +242,20 @@ function Footer({ design }: { design: Design }) {
         <span>Independent. Locally rooted. Made with heart.</span>
         <a href="#main">{t('Back to top ↑')}</a>
       </div>
-    </footer>
+    </LocalizedMain>
   );
 }
 
 function DesignSwitcher({ design }: { design: Design }) {
+  const { t } = useLanguage();
   const { notice } = useAppearance();
   return (
     <>
       <nav
         className="design-switcher"
-        aria-label="Explore website design directions"
+        aria-label={t('Explore website design directions')}
       >
-        <span className="switcher-label">THE COLLECTION</span>
+        <span className="switcher-label">{t('THE COLLECTION')}</span>
         {designs.map((item) => (
           <Link
             key={item.id}
@@ -260,7 +263,7 @@ function DesignSwitcher({ design }: { design: Design }) {
             search={{ design: item.id }}
             aria-current={design === item.id ? "page" : undefined}
             className={design === item.id ? "selected" : ""}
-            title={item.title}
+            title={t(item.title)}
           >
             <span className={`design-dot dot-${item.id}`} />
             <span className="design-number">{item.number}</span>
@@ -270,7 +273,7 @@ function DesignSwitcher({ design }: { design: Design }) {
       </nav>
       {notice && (
         <p className="appearance-notice" role="status">
-          {notice}
+          {t(notice)}
         </p>
       )}
     </>

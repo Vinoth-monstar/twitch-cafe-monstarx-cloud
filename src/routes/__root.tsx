@@ -10,6 +10,7 @@ import { seoConfig, seoHead } from "@/lib/monstarx/seo";
 import { Site } from "@/components/Site";
 import { AppearanceProvider } from "@/components/AppearanceProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { LocalizedMain } from '@/components/LocalizedMain';
 import type { Design } from "@/data/cafe";
 import appCss from "../styles.css?url";
 import cloudCss from "../cloud-features.css?url";
@@ -71,7 +72,7 @@ function RootLayout() {
 }
 function NotFound() {
   return (
-    <main id="main" className="not-found page-wrap section-space">
+    <LocalizedMain id="main" className="not-found page-wrap section-space">
       <p className="eyebrow">A little detour</p>
       <h1>
         Let’s find your
@@ -82,6 +83,6 @@ function NotFound() {
       <Link to="/" className="button">
         Back to Twitch
       </Link>
-    </main>
+    </LocalizedMain>
   );
 }

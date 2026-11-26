@@ -1,9 +1,13 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
+import { publicTranslations } from '@/data/public-translations'
+import { accountTranslations } from '@/data/account-translations'
 
 export type Language = 'en' | 'ms' | 'zh' | 'ta'
 type Translation = [string, string, string]
 const translations: Record<string, Translation> = {
+  ...publicTranslations,
+  ...accountTranslations,
   'Our story': ['Kisah kami', '我们的故事', 'எங்கள் கதை'],
   'The menu': ['Menu', '菜单', 'உணவுப் பட்டியல்'],
   'Gather here': ['Berkumpul di sini', '相聚于此', 'இங்கு கூடுங்கள்'],
@@ -121,7 +125,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [])
   useEffect(() => { document.documentElement.lang = language === 'zh' ? 'zh-Hans' : language }, [language])
   const setLanguage = (next: Language) => { setCurrent(next); try { localStorage.setItem('twitch-language', next) } catch { /* Storage may be unavailable. */ } }
-  const t = (text: string) => language === 'en' ? text : translations[text]?.[language === 'ms' ? 0 : language === 'zh' ? 1 : 2] ?? text
+  const t = (text: string) => {
+    if (language === 'en' || !text.trim()) return text
+    const key = text.trim().replace(/\s+/g, ' ')
+    const value = translations[key]?.[language === 'ms' ? 0 : language === 'zh' ? 1 : 2]
+    return value ? `${text.match(/^\s*/)?.[0] ?? ''}${value}${text.match(/\s*$/)?.[0] ?? ''}` : text
+  }
   return <LanguageContext.Provider value={{ language, ready, setLanguage, t }}>{children}</LanguageContext.Provider>
 }
 export function useLanguage() { return useContext(LanguageContext) }

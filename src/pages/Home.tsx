@@ -1,3 +1,4 @@
+import { LocalizedMain } from '@/components/LocalizedMain';
 import { ArrowDown, ArrowUpRight, Sun } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useDesign, useDesignSearch } from "../hooks/use-design";
@@ -10,7 +11,7 @@ export function HomePage() {
   const design = useDesign();
   const designSearch = useDesignSearch();
   return (
-    <main id="main">
+    <LocalizedMain id="main">
       {design === "atelier" ? (
         <AtelierHero />
       ) : design === "nocturne" ? (
@@ -165,14 +166,14 @@ export function HomePage() {
           Plan your next cup
         </PageLink>
       </section>
-    </main>
+    </LocalizedMain>
   );
 }
 
 function ForestHero() {
   const { t, language } = useLanguage();
   return (
-    <section className="hero-forest page-wrap">
+    <LocalizedMain as="section" className="hero-forest page-wrap">
       <div className="hero-copy">
         <Eyebrow>{t('Your neighbourhood café · Petaling Jaya')}</Eyebrow>
         <h1 className="hero-headline">
@@ -222,13 +223,13 @@ function ForestHero() {
         </div>
         <span className="hero-side-caption">COFFEE. CULTURE. CONNECTION.</span>
       </div>
-    </section>
+    </LocalizedMain>
   );
 }
 
 function AtelierHero() {
   return (
-    <section className="hero-atelier page-wrap">
+    <LocalizedMain as="section" className="hero-atelier page-wrap">
       <div className="atelier-heading">
         <Eyebrow>An independent café in Petaling Jaya</Eyebrow>
         <h1>
@@ -283,7 +284,7 @@ function AtelierHero() {
           Connection.
         </span>
       </div>
-    </section>
+    </LocalizedMain>
   );
 }
 
@@ -291,7 +292,7 @@ function NocturneHero() {
   const { t, language } = useLanguage();
   const designSearch = useDesignSearch();
   return (
-    <section className="hero-nocturne">
+    <LocalizedMain as="section" className="hero-nocturne">
       <Photo
         image="cafe-interior"
         alt="The intimate green interior and warm lighting of Twitch Cafe"
@@ -341,6 +342,6 @@ function NocturneHero() {
           </a>
         </div>
       </div>
-    </section>
+    </LocalizedMain>
   );
 }

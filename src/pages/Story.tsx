@@ -1,10 +1,11 @@
+import { LocalizedMain } from '@/components/LocalizedMain';
 import { useDesign } from "../hooks/use-design";
 import { Eyebrow, PageLink, Photo, Reveal } from "../components/ui";
 
 export function StoryPage() {
   const design = useDesign();
   return (
-    <main id="main" className="story-page">
+    <LocalizedMain id="main" className="story-page">
       <section className="page-title page-wrap">
         <Eyebrow>The people. The places. The beginnings.</Eyebrow>
         <h1>
@@ -171,6 +172,6 @@ export function StoryPage() {
           ))}
         </div>
       </section>
-    </main>
+    </LocalizedMain>
   );
 }

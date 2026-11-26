@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, ImageOff } from "lucide-react";
 import { assets } from "@/data/cafe";
 import type { Design, PhotoKey } from "@/data/cafe";
+import { useLanguage } from './LanguageProvider';
 import { useDesignSearch } from "@/hooks/use-design";
 
 export type PublicPath =
@@ -30,6 +31,7 @@ export function Photo({
   position?: string;
   sizes?: string;
 }) {
+  const { t } = useLanguage();
   const asset = assets[image];
   const [failedSource, setFailedSource] = useState<string | null>(null);
   if (!asset || failedSource === asset.src)
@@ -37,10 +39,10 @@ export function Photo({
       <div
         className={`photo photo-placeholder ${className}`}
         role="img"
-        aria-label={`Photograph unavailable: ${alt}`}
+        aria-label={`${t('Photograph unavailable')}: ${t(alt)}`}
       >
         <ImageOff size={22} strokeWidth={1} aria-hidden="true" />
-        <span>{alt}</span>
+        <span>{t(alt)}</span>
       </div>
     );
   return (
@@ -48,7 +50,7 @@ export function Photo({
       src={asset.src}
       width={asset.width}
       height={asset.height}
-      alt={alt}
+      alt={t(alt)}
       className={`photo ${className}`}
       loading={priority ? "eager" : "lazy"}
       fetchPriority={priority ? "high" : "auto"}
@@ -97,10 +99,11 @@ export function Eyebrow({
   children: ReactNode;
   light?: boolean;
 }) {
+  const { t } = useLanguage();
   return (
     <p className={`eyebrow${light ? " eyebrow--light" : ""}`}>
       <span />
-      {children}
+      {typeof children === 'string' ? t(children) : children}
     </p>
   );
 }
@@ -118,13 +121,14 @@ export function PageLink({
   className?: string;
 }) {
   const designSearch = useDesignSearch();
+  const { t } = useLanguage();
   return (
     <Link
       to={to}
       search={designSearch}
       className={`${secondary ? "text-link" : "button"} ${className}`}
     >
-      <span>{children}</span>
+      <span>{typeof children === 'string' ? t(children) : children}</span>
       <ArrowUpRight size={17} strokeWidth={1.6} aria-hidden="true" />
     </Link>
   );
@@ -141,6 +145,7 @@ export function ExternalLink({
   className?: string;
   button?: boolean;
 }) {
+  const { t } = useLanguage();
   return (
     <a
       href={href}
@@ -148,9 +153,9 @@ export function ExternalLink({
       rel="noreferrer"
       className={`${button ? "button" : "text-link"} ${className}`}
     >
-      <span>{children}</span>
+      <span>{typeof children === 'string' ? t(children) : children}</span>
       <ArrowUpRight size={17} strokeWidth={1.6} aria-hidden="true" />
-      <span className="sr-only"> (opens in a new tab)</span>
+      <span className="sr-only"> {t('(opens in a new tab)')}</span>
     </a>
   );
 }

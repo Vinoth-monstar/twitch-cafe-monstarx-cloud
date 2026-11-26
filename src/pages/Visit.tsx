@@ -1,3 +1,4 @@
+import { LocalizedMain } from '@/components/LocalizedMain';
 import { MapPin, Sun } from "lucide-react";
 import { cafe } from "../data/cafe";
 import { Eyebrow, ExternalLink, Photo, Reveal } from "../components/ui";
@@ -7,7 +8,7 @@ import { useLanguage } from "../components/LanguageProvider";
 export function VisitPage() {
   const { t } = useLanguage();
   return (
-    <main id="main" className="visit-page">
+    <LocalizedMain id="main" className="visit-page">
       <section className="page-title page-wrap">
         <Eyebrow>{t('Your little corner of Petaling Jaya')}</Eyebrow>
         <h1>
@@ -108,6 +109,6 @@ export function VisitPage() {
           </Reveal>
         </div>
       </section>
-    </main>
+    </LocalizedMain>
   );
 }

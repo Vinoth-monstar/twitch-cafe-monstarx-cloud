@@ -1,3 +1,4 @@
+import { LocalizedMain } from '@/components/LocalizedMain';
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowDown } from "lucide-react";
@@ -15,7 +16,7 @@ export function MenuPage() {
       ? menu
       : menu.filter((category) => category.id === selected);
   return (
-    <main id="main" className="menu-page">
+    <LocalizedMain id="main" className="menu-page">
       <section className="menu-intro page-wrap">
         <div>
           <Eyebrow>{t('Your usual, or something new')}</Eyebrow>
@@ -79,8 +80,8 @@ export function MenuPage() {
         </p>
         <div aria-live="polite" className="sr-only">
           {selected === "all"
-            ? "Showing all menu categories"
-            : `Showing ${visible[0]?.label}`}
+            ? t('Showing all menu categories')
+            : t('Showing {category}').replace('{category}', t(visible[0]?.label ?? ''))}
         </div>
         <div key={selected} className="menu-category-reveal">
           {visible.map((category) => (
@@ -95,7 +96,7 @@ export function MenuPage() {
                 <p>{t(category.intro)}</p>
                 <Photo
                   image={category.image}
-                  alt={`${t(category.label)} at Twitch Cafe`}
+                  alt={t('{category} at Twitch Cafe').replace('{category}', t(category.label))}
                 />
               </div>
               <div className="menu-items">
@@ -120,6 +121,6 @@ export function MenuPage() {
           Something caught your eye? Come by and make it your usual.
         </p>
       </section>
-    </main>
+    </LocalizedMain>
   );
 }
