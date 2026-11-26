@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { MotionConfig } from "motion/react";
 import { ArrowUpRight, Menu as MenuIcon, Moon, Sun, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
@@ -11,8 +10,7 @@ import { useAppearance, useDesign, useDesignSearch } from "@/hooks/use-design";
 export function Site({ children }: { children: ReactNode }) {
   const design = useDesign();
   return (
-    <MotionConfig reducedMotion="user">
-      <div className="site" data-design={design}>
+    <div className="site" data-design={design}>
         <a className="skip-link" href="#main">
           Skip to content
         </a>
@@ -20,8 +18,7 @@ export function Site({ children }: { children: ReactNode }) {
         {children}
         <Footer design={design} />
         <DesignSwitcher design={design} />
-      </div>
-    </MotionConfig>
+    </div>
   );
 }
 

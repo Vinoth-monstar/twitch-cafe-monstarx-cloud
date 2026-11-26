@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CSSProperties, ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, ImageOff } from "lucide-react";
 import { assets } from "@/data/cafe";
@@ -72,19 +71,23 @@ export function Reveal({
   delay?: number;
   style?: CSSProperties;
 }) {
-  const reduced = useReducedMotion();
-  return (
-    <motion.div
-      className={className}
-      style={style}
-      initial={reduced ? false : { opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.12 }}
-      transition={{ duration: 0.7, delay, ease: [0.2, 0.7, 0.2, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches || typeof IntersectionObserver === "undefined" || typeof element.animate !== "function") return;
+    let animation: Animation | undefined;
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      animation = element.animate(
+        [{ opacity: 0, transform: "translateY(24px)" }, { opacity: 1, transform: "translateY(0)" }],
+        { duration: 700, delay: delay * 1000, easing: "cubic-bezier(0.2, 0.7, 0.2, 1)" },
+      );
+    }, { threshold: 0.12 });
+    observer.observe(element);
+    return () => { observer.disconnect(); animation?.cancel(); };
+  }, [delay]);
+  return <div ref={ref} className={className} style={style}>{children}</div>;
 }
 
 export function Eyebrow({
