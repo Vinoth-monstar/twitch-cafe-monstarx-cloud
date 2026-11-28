@@ -4,18 +4,21 @@ A fresh MonstarX Cloud version of Twitch Cafe Monstarx.
 
 Generated with [MonstarX](https://github.com/) — a full-stack **TanStack Start** app (React 19, TanStack Router, server functions, Tailwind CSS v4).
 
-## Café designs and photos
+## Approved design and photos
 
-The original local Twitch Cafe design is integrated into this native MonstarX Cloud project:
+Nocturne is the single approved design across the homepage, story, menu, gatherings, visit, and account pages. There is no appearance switch or design collection bar. Old `/atelier` and `/nocturne` URLs redirect to `/`; old design preferences cannot change the appearance. Menu categories remain shareable in the URL.
 
-- `/` — Forest: warm ivory, forest green, and an asymmetric coffee composition.
-- `/atelier` — Atelier: a light editorial layout with a photographic triptych.
-- `/nocturne` — Nocturne: a dark, cinematic café composition.
-- `/story`, `/menu`, `/gather`, and `/visit` share the selected design.
+English and Tamil are available. Malay and Chinese are temporarily hidden while their translations are corrected; their existing translation catalogs are retained. Previously saved unsupported language selections fall back to English.
 
-The collection bar switches between all three directions. The header's light/dark switch still remembers the visitor's appearance preference; changing appearance preserves enquiry edits and menu filters. Menu categories remain shareable in the URL.
+All 113 images are included in `public/assets/`: 65 supplied slide crops, 37 larger company-profile photographs, and 11 new client-supplied coffee photographs. `src/data/assets.json` records provenance, dimensions, and size. The homepage highlights the client's coffee with a dedicated photography section and three featured coffee drinks. Existing menu items are unchanged; ingredient notes and the separate Tuesday note are not published as menu items or specials.
 
-All 102 images are included in `public/assets/`: 65 supplied slide crops and 37 larger photographs recovered from the company profile. `src/data/assets.json` records each image's source, dimensions, and size. There is no separate image upload step. The original Cormorant Garamond and DM Sans fonts are bundled locally. Viewport reveals and hero animation respect reduced motion.
+The new photographs are optimized WebP files and travel with the GitHub source, so MonstarX needs no separate upload step. To re-import the supplied photographs locally (requires Python and Pillow):
+
+```bash
+python3 scripts/import-coffee-photos.py --source-dir /path/to/twitch-cafe-logo
+```
+
+Cormorant Garamond and DM Sans load through the existing Google Fonts links used by the MonstarX build. Native viewport reveals, hero animation, and image hover effects respect reduced motion.
 
 MonstarX's accounts, private saved drafts, database schema, migrations, service helpers, and owner-managed SEO/GEO configuration are retained. The gathering flow prepares an Instagram message; saving a private draft does not send an enquiry or confirm a booking.
 
@@ -42,9 +45,9 @@ npm run typecheck
 npm run build                    # the native Cloudflare Worker build
 ```
 
-Application copy and menu items live in `src/data/cafe.ts`. The main design system is `src/styles.css`; `src/cloud-features.css` styles the retained account and appearance features. Current hours, menu prices, public contact details, and delivery URLs remain owner-supplied values. SEO/GEO settings continue to be managed from MonstarX's SEO/GEO tab.
+Application copy and menu items live in `src/data/cafe.ts`. The main design system is `src/styles.css`; `src/cloud-features.css` styles the retained account features. Current hours, menu prices, public contact details, and delivery URLs remain owner-supplied values. SEO/GEO settings continue to be managed from MonstarX's SEO/GEO tab.
 
-Verified on 26 November 2026: TypeScript, the native Worker build, and a Wrangler deployment dry run passed. HTTP checks passed for the public/account-access pages and all 102 images. Browser checks covered 320, 390, 768, and 1440 pixel layouts, menu filtering without scroll jumps, appearance changes preserving form edits and filters, mobile navigation, and gallery focus restoration. Synthetic local accounts verified draft saving, reload persistence, owner isolation, sign-out protection, and deletion persistence. No remote account or database was used for these tests.
+Verified on 28 November 2026: asset integrity, TypeScript, the native Worker build, and a Wrangler deployment dry run passed. HTTP checks covered all 113 bundled images, public and account-access pages, and permanent redirects for the old design URLs. Browser checks covered 320, 390, 768, and 1440 pixel layouts, English/Tamil switching, menu filters, enquiry edits, mobile navigation, and the coffee photography. A fresh browser session reported no console warnings or errors. The retained account and private-draft flows were previously verified with synthetic accounts in a local database. No remote account or database was used for those tests.
 
 The existing owner settings have search indexing disabled, so the managed `/sitemap.xml` intentionally returns 404. Enable indexing and set the production URL in MonstarX's SEO/GEO settings when ready for search discovery.
 

@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement } from 'react'
+import { Children, cloneElement, isValidElement } from 'react'
 import type { HTMLAttributes, ReactNode } from 'react'
 import { useLanguage } from './LanguageProvider'
 
@@ -8,7 +8,7 @@ export function LocalizedMain({ children, as: Tag = 'main', ...props }: HTMLAttr
   const { t } = useLanguage()
   const visit = (node: ReactNode): ReactNode => {
     if (typeof node === 'string') return t(node)
-    if (Array.isArray(node)) return node.map(visit)
+    if (Array.isArray(node)) return Children.map(node, visit)
     if (!isValidElement<Record<string, unknown>>(node)) return node
     if (node.props.translate === 'no') return node
     const translated: Record<string, unknown> = {}

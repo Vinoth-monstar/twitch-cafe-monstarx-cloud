@@ -315,7 +315,7 @@
     "bytes": 60880
   },
   "slide2-slide-2": {
-    "src": "/placeholders/image-1.svg",
+    "src": "/assets/slide2-slide-2.webp",
     "width": 556,
     "height": 812,
     "originalWidth": 556,
@@ -916,5 +916,104 @@
     "originalHeight": 2046,
     "source": "Company profile PDF, physical page 26, embedded image 177",
     "bytes": 135292
+  },
+  "client-latte-art": {
+    "src": "/assets/client-latte-art.webp",
+    "width": 720,
+    "height": 1280,
+    "originalWidth": 720,
+    "originalHeight": 1280,
+    "source": "Client-supplied coffee photograph: Product-3.jpeg",
+    "bytes": 54784
+  },
+  "client-coffee-and-cookie": {
+    "src": "/assets/client-coffee-and-cookie.webp",
+    "width": 720,
+    "height": 1280,
+    "originalWidth": 720,
+    "originalHeight": 1280,
+    "source": "Client-supplied coffee photograph: Product-4.jpeg",
+    "bytes": 175938
+  },
+  "client-spanish-latte": {
+    "src": "/assets/client-spanish-latte.webp",
+    "width": 858,
+    "height": 1280,
+    "originalWidth": 858,
+    "originalHeight": 1280,
+    "source": "Client-supplied coffee photograph: Product-5.jpeg",
+    "bytes": 74506
+  },
+  "client-sunlit-latte": {
+    "src": "/assets/client-sunlit-latte.webp",
+    "width": 720,
+    "height": 1280,
+    "originalWidth": 720,
+    "originalHeight": 1280,
+    "source": "Client-supplied coffee photograph: Product-6.jpeg",
+    "bytes": 29732
+  },
+  "client-dirty-latte": {
+    "src": "/assets/client-dirty-latte.webp",
+    "width": 720,
+    "height": 1280,
+    "originalWidth": 720,
+    "originalHeight": 1280,
+    "source": "Client-supplied coffee photograph: Product-7.jpeg",
+    "bytes": 40326
+  },
+  "client-latte-and-shadow": {
+    "src": "/assets/client-latte-and-shadow.webp",
+    "width": 720,
+    "height": 1280,
+    "originalWidth": 720,
+    "originalHeight": 1280,
+    "source": "Client-supplied coffee photograph: Product-8.jpeg",
+    "bytes": 29582
+  },
+  "client-iced-coffee": {
+    "src": "/assets/client-iced-coffee.webp",
+    "width": 1016,
+    "height": 1280,
+    "originalWidth": 1016,
+    "originalHeight": 1280,
+    "source": "Client-supplied coffee photograph: product-1.jpeg",
+    "bytes": 83134
+  },
+  "client-signature-drink": {
+    "src": "/assets/client-signature-drink.webp",
+    "width": 720,
+    "height": 1280,
+    "originalWidth": 720,
+    "originalHeight": 1280,
+    "source": "Client-supplied coffee photograph: product-10.jpeg",
+    "bytes": 45580
+  },
+  "client-espresso-craft": {
+    "src": "/assets/client-espresso-craft.webp",
+    "width": 1206,
+    "height": 1082,
+    "originalWidth": 1206,
+    "originalHeight": 1082,
+    "source": "Client-supplied coffee photograph: product-11.jpeg",
+    "bytes": 77870
+  },
+  "client-coffee-beans": {
+    "src": "/assets/client-coffee-beans.webp",
+    "width": 720,
+    "height": 1280,
+    "originalWidth": 720,
+    "originalHeight": 1280,
+    "source": "Client-supplied coffee photograph: product-2.jpeg",
+    "bytes": 54060
+  },
+  "client-coffee-preparation": {
+    "src": "/assets/client-coffee-preparation.webp",
+    "width": 974,
+    "height": 1280,
+    "originalWidth": 974,
+    "originalHeight": 1280,
+    "source": "Client-supplied coffee photograph: product-9.jpeg",
+    "bytes": 79752
   }
 }

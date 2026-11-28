@@ -2,8 +2,8 @@
 
 :root {
   font-family: "DM Sans", sans-serif;
-  color: #173f2d;
-  background: #f6f3ea;
+  color: #eee8d8;
+  background: #15291f;
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   font-optical-sizing: auto;
@@ -336,9 +336,23 @@ p {
   gap: 25px;
   font-size: 10px;
 }
-.language-selector { display: inline-flex; align-items: center; color: var(--ink); font-size: 11px; }
-.language-selector select { max-width: 130px; min-height: 40px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); padding: 6px; }
-.mobile-navigation .language-selector { margin-top: 20px; }
+.language-selector {
+  display: inline-flex;
+  align-items: center;
+  color: var(--ink);
+  font-size: 11px;
+}
+.language-selector select {
+  max-width: 130px;
+  min-height: 40px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 6px;
+}
+.mobile-navigation .language-selector {
+  margin-top: 20px;
+}
 .mobile-toggle {
   display: none;
 }
@@ -3257,5 +3271,171 @@ p {
   [style*="opacity: 0"] {
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+/* Client-approved Nocturne coffee photography. */
+.coffee-focus {
+  border-bottom: 1px solid var(--line);
+}
+.coffee-heading {
+  margin-bottom: 40px;
+}
+.coffee-heading-copy {
+  max-width: 320px;
+  padding-bottom: 4px;
+}
+.coffee-heading-copy p {
+  font-size: 13px;
+}
+.coffee-heading-copy .text-link {
+  margin-top: 18px;
+}
+.coffee-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.16fr;
+  gap: 30px;
+}
+.coffee-lead {
+  min-width: 0;
+}
+.coffee-lead figure {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.coffee-lead .coffee-photo {
+  flex: 1;
+  min-height: 470px;
+}
+.coffee-photo {
+  overflow: hidden;
+  background: var(--wash);
+}
+.coffee-photo img {
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.coffee-photo:hover img {
+  transform: scale(1.035);
+}
+.coffee-mosaic {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 20px;
+}
+.coffee-tile .coffee-photo {
+  height: 245px;
+}
+.coffee-lead figcaption,
+.coffee-tile figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 13px;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.6;
+}
+.coffee-lead figcaption > span:first-child,
+.coffee-tile figcaption > span:first-child {
+  color: var(--accent);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.site[data-design="nocturne"] .site-footer {
+  padding-bottom: 32px;
+}
+@media (max-width: 800px) {
+  .coffee-layout {
+    gap: 20px;
+  }
+  .coffee-tile .coffee-photo {
+    height: 205px;
+  }
+  .coffee-lead .coffee-photo {
+    min-height: 420px;
+  }
+  .coffee-heading-copy {
+    max-width: 260px;
+  }
+  .coffee-heading-copy p {
+    font-size: 12px;
+  }
+  .coffee-lead figcaption {
+    flex-direction: column;
+    gap: 3px;
+  }
+}
+@media (max-width: 620px) {
+  .coffee-heading {
+    display: block;
+  }
+  .coffee-heading-copy {
+    max-width: none;
+    margin-top: 23px;
+  }
+  .coffee-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+  .coffee-lead .coffee-photo {
+    height: 360px;
+    min-height: 0;
+    flex: auto;
+  }
+  .coffee-lead figcaption {
+    flex-direction: row;
+    gap: 15px;
+  }
+  .coffee-mosaic {
+    gap: 22px 14px;
+  }
+  .coffee-tile .coffee-photo {
+    height: 220px;
+  }
+  .coffee-tile figcaption {
+    font-size: 9px;
+    gap: 8px;
+  }
+  .site[data-design="nocturne"] .site-footer {
+    padding-bottom: 26px;
+  }
+}
+@media (max-width: 360px) {
+  .coffee-tile .coffee-photo {
+    height: 185px;
+  }
+  .coffee-lead figcaption {
+    flex-direction: column;
+    gap: 3px;
+  }
+}
+
+/* Tamil needs its own type scale and line height to fit the same compositions. */
+html:lang(ta) h1,
+html:lang(ta) h2,
+html:lang(ta) h3 {
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.35;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+html:lang(ta) h1 {
+  font-size: clamp(36px, 4.8vw, 72px);
+}
+html:lang(ta) h2 {
+  font-size: clamp(26px, 3.5vw, 48px);
+}
+html:lang(ta) h3 {
+  font-size: clamp(20px, 2.2vw, 28px);
+}
+html:lang(ta) .nocturne-hero-content > div:first-child {
+  max-width: 65%;
+  min-width: 0;
+}
+@media (max-width: 620px) {
+  html:lang(ta) .nocturne-hero-content > div:first-child {
+    max-width: none;
   }
 }

@@ -112,19 +112,19 @@ const translations: Record<string, Translation> = {
 }
 type Context = { language: Language; ready: boolean; setLanguage: (language: Language) => void; t: (text: string) => string }
 const LanguageContext = createContext<Context>({ language: 'en', ready: false, setLanguage: () => {}, t: text => text })
-const valid = (value: string | null): value is Language => value === 'en' || value === 'ms' || value === 'zh' || value === 'ta'
+const valid = (value: string | null): value is Language => value === 'en' || value === 'ta'
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setCurrent] = useState<Language>('en')
   const [ready, setReady] = useState(false)
   useEffect(() => {
     try { const stored = localStorage.getItem('twitch-language'); if (valid(stored)) setCurrent(stored) } catch { /* The current choice still works for this visit. */ }
     setReady(true)
-    const sync = (event: StorageEvent) => { if (event.key === 'twitch-language' && valid(event.newValue)) setCurrent(event.newValue) }
+    const sync = (event: StorageEvent) => { if (event.key === 'twitch-language' || event.key === null) setCurrent(valid(event.newValue) ? event.newValue : 'en') }
     window.addEventListener('storage', sync)
     return () => window.removeEventListener('storage', sync)
   }, [])
   useEffect(() => { document.documentElement.lang = language === 'zh' ? 'zh-Hans' : language }, [language])
-  const setLanguage = (next: Language) => { setCurrent(next); try { localStorage.setItem('twitch-language', next) } catch { /* Storage may be unavailable. */ } }
+  const setLanguage = (next: Language) => { if (!valid(next)) return; setCurrent(next); try { localStorage.setItem('twitch-language', next) } catch { /* Storage may be unavailable. */ } }
   const t = (text: string) => {
     if (language === 'en' || !text.trim()) return text
     const key = text.trim().replace(/\s+/g, ' ')
@@ -136,5 +136,5 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 export function useLanguage() { return useContext(LanguageContext) }
 export function LanguageSelector() {
   const { language, ready, setLanguage } = useLanguage()
-  return <label className="language-selector"><span className="sr-only">Language / Bahasa / 语言 / மொழி</span><select aria-label="Language / Bahasa / 语言 / மொழி" value={language} disabled={!ready} onChange={event => setLanguage(event.target.value as Language)}><option value="en">English</option><option value="ms">Bahasa Melayu</option><option value="zh">中文</option><option value="ta">தமிழ்</option></select></label>
+  return <label className="language-selector"><span className="sr-only">Language / மொழி</span><select aria-label="Language / மொழி" value={language} disabled={!ready} onChange={event => setLanguage(event.target.value as Language)}><option value="en">English</option><option value="ta">தமிழ்</option></select></label>
 }

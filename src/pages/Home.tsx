@@ -1,9 +1,10 @@
-import { LocalizedMain } from '@/components/LocalizedMain';
+import { LocalizedMain } from "@/components/LocalizedMain";
 import { ArrowDown, ArrowUpRight, Sun } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useDesign, useDesignSearch } from "../hooks/use-design";
 import { Eyebrow, PageLink, Photo, Reveal } from "../components/ui";
 import { featured } from "../data/cafe";
+import { CoffeeFocus } from "@/components/CoffeeFocus";
 import { useLanguage } from "../components/LanguageProvider";
 
 export function HomePage() {
@@ -12,23 +13,18 @@ export function HomePage() {
   const designSearch = useDesignSearch();
   return (
     <LocalizedMain id="main">
-      {design === "atelier" ? (
-        <AtelierHero />
-      ) : design === "nocturne" ? (
-        <NocturneHero />
-      ) : (
-        <ForestHero />
-      )}
+      <NocturneHero />
       <div className="brand-strip">
-        <span>{t('Thoughtfully brewed.')}</span>
+        <span>{t("Thoughtfully brewed.")}</span>
         <span className="strip-flower">✳</span>
-        <span>{t('Locally rooted.')}</span>
+        <span>{t("Locally rooted.")}</span>
         <span className="strip-flower">✳</span>
-        <span>{t('Always a warm welcome.')}</span>
+        <span>{t("Always a warm welcome.")}</span>
       </div>
+      <CoffeeFocus />
       <section className="introduction page-wrap section-space">
         <Reveal>
-          <Eyebrow>{t('A café with a story')}</Eyebrow>
+          <Eyebrow>{t("A café with a story")}</Eyebrow>
           <h2>
             A little Brisbane.
             <br />A lot of <em>heart.</em>
@@ -53,7 +49,7 @@ export function HomePage() {
       >
         <Reveal className="section-heading">
           <div>
-            <Eyebrow>{t('Made for your everyday')}</Eyebrow>
+            <Eyebrow>{t("Made for your everyday")}</Eyebrow>
             <h2>
               Find your
               <br />
@@ -101,7 +97,7 @@ export function HomePage() {
             <span className="image-note">A little corner of Section 19.</span>
           </Reveal>
           <Reveal className="space-feature-copy" delay={0.15}>
-            <Eyebrow>{t('Make yourself at home')}</Eyebrow>
+            <Eyebrow>{t("Make yourself at home")}</Eyebrow>
             <h2>
               Your <br />
               favourite
@@ -129,7 +125,7 @@ export function HomePage() {
       </section>
       <section className="gather-preview page-wrap section-space">
         <Reveal className="gather-preview-copy">
-          <Eyebrow>{t('More than a coffee stop')}</Eyebrow>
+          <Eyebrow>{t("More than a coffee stop")}</Eyebrow>
           <h2>
             Bring your people.
             <br />
@@ -170,124 +166,6 @@ export function HomePage() {
   );
 }
 
-function ForestHero() {
-  const { t, language } = useLanguage();
-  return (
-    <LocalizedMain as="section" className="hero-forest page-wrap">
-      <div className="hero-copy">
-        <Eyebrow>{t('Your neighbourhood café · Petaling Jaya')}</Eyebrow>
-        <h1 className="hero-headline">
-          {language === 'en' ? <><span>Good coffee.</span><span>Better</span><span><em>company.</em></span></> : <span>{t('Good coffee. Better company.')}</span>}
-        </h1>
-        <div className="hero-description">
-          <span className="small-rule" />
-          <p>
-            {t('A little Australia. A little Malaysia. A place to feel right at home.')}
-          </p>
-        </div>
-        <div className="hero-actions">
-          <PageLink to="/menu" design="forest">
-            {t('Explore the menu')}
-          </PageLink>
-          <PageLink to="/story" design="forest" secondary>
-            {t('Our story')}
-          </PageLink>
-        </div>
-        <a className="scroll-note" href="#favourites">
-          <ArrowDown size={13} /> Take a little look around
-        </a>
-      </div>
-      <div className="hero-visual">
-        <div className="hero-main-photo">
-          <Photo
-            image="pour-over"
-            alt="Hand-poured filter coffee in the morning sunlight at Twitch Cafe"
-            priority
-          />
-        </div>
-        <div className="hero-small-photo">
-          <Photo
-            image="window-seat"
-            alt="A quiet window seat in the café"
-            priority
-          />
-          <span>STAY A LITTLE LONGER.</span>
-        </div>
-        <div className="coffee-seal">
-          <Sun size={24} strokeWidth={1.2} />
-          <span>
-            Good things
-            <br />
-            <em>brew here.</em>
-          </span>
-        </div>
-        <span className="hero-side-caption">COFFEE. CULTURE. CONNECTION.</span>
-      </div>
-    </LocalizedMain>
-  );
-}
-
-function AtelierHero() {
-  return (
-    <LocalizedMain as="section" className="hero-atelier page-wrap">
-      <div className="atelier-heading">
-        <Eyebrow>An independent café in Petaling Jaya</Eyebrow>
-        <h1>
-          Stay a little
-          <br />
-          <em>longer.</em>
-          <span className="atelier-asterisk">✳</span>
-        </h1>
-        <p>
-          A good cup. Something comforting.
-          <br />A moment that’s entirely yours.
-        </p>
-      </div>
-      <div className="atelier-pictures">
-        <figure className="atelier-picture-small">
-          <Photo
-            image="morning-latte"
-            alt="A latte with a heart in the morning sunlight"
-            priority
-          />
-          <figcaption>01 — THE FIRST SIP</figcaption>
-        </figure>
-        <figure className="atelier-picture-main">
-          <Photo
-            image="window-seat"
-            alt="A relaxed moment in the light-filled café window"
-            priority
-          />
-          <figcaption>YOUR LITTLE CORNER OF PETALING JAYA.</figcaption>
-        </figure>
-        <figure className="atelier-picture-side">
-          <Photo
-            image="butter-cake"
-            alt="A slice of homemade butter cake"
-            priority
-          />
-          <figcaption>02 — SOMETHING SWEET</figcaption>
-        </figure>
-      </div>
-      <div className="atelier-bottom">
-        <span>
-          Australian inspiration.
-          <br />
-          Malaysian soul.
-        </span>
-        <PageLink to="/menu" design="atelier">
-          Find your favourite
-        </PageLink>
-        <span className="atelier-bottom-right">
-          Coffee. Culture.
-          <br />
-          Connection.
-        </span>
-      </div>
-    </LocalizedMain>
-  );
-}
-
 function NocturneHero() {
   const { t, language } = useLanguage();
   const designSearch = useDesignSearch();
@@ -302,21 +180,31 @@ function NocturneHero() {
       <div className="nocturne-shade" />
       <div className="nocturne-hero-content page-wrap">
         <div>
-          <Eyebrow light>{t('Good coffee, good company · Section 19')}</Eyebrow>
+          <Eyebrow light>{t("Good coffee, good company · Section 19")}</Eyebrow>
           <h1>
-            {language === 'en' ? <>Your daily<br /><em>escape.</em></> : t('Your daily escape.')}
+            {language === "en" ? (
+              <>
+                Your daily
+                <br />
+                <em>escape.</em>
+              </>
+            ) : (
+              t("Your daily escape.")
+            )}
           </h1>
           <p>
-            {t('Step out of the rush. Into a good cup, a familiar face, and a little time for yourself.')}
+            {t(
+              "Step out of the rush. Into a good cup, a familiar face, and a little time for yourself.",
+            )}
           </p>
           <PageLink to="/menu" design="nocturne">
-            {t('Discover your usual')}
+            {t("Discover your usual")}
           </PageLink>
         </div>
         <div className="nocturne-drink">
           <Photo
-            image="spanish-latte"
-            alt="A layered Spanish latte served in a glass"
+            image="client-iced-coffee"
+            alt="Iced coffee on a sunlit wooden table at Twitch Cafe"
             priority
           />
           <div>
@@ -337,7 +225,7 @@ function NocturneHero() {
         </div>
         <div className="nocturne-hero-bottom">
           <span>COFFEE. CULTURE. CONNECTION.</span>
-          <a href="#favourites">
+          <a href="#coffee">
             A little more to discover <ArrowDown size={14} />
           </a>
         </div>

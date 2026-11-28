@@ -2,31 +2,7 @@ import assetManifest from "./assets.json";
 
 export type PhotoKey = keyof typeof assetManifest;
 export const assets = assetManifest;
-export type Design = "forest" | "atelier" | "nocturne";
-
-export const designs = [
-  {
-    id: "forest",
-    number: "01",
-    name: "Forest",
-    title: "The everyday ritual",
-    path: "/",
-  },
-  {
-    id: "atelier",
-    number: "02",
-    name: "Atelier",
-    title: "A slower kind of beautiful",
-    path: "/atelier",
-  },
-  {
-    id: "nocturne",
-    number: "03",
-    name: "Nocturne",
-    title: "A little everyday escape",
-    path: "/nocturne",
-  },
-] as const;
+export type Design = "nocturne";
 
 export const cafe = {
   name: "Twitch Cafe",
@@ -60,16 +36,16 @@ export const featured = [
     alt: "Tiramisu latte topped with a biscuit and cocoa",
   },
   {
-    name: "Strawberry Matcha",
-    category: "Something a little different",
-    image: "strawberry-matcha",
-    alt: "Layered strawberry and matcha drink in the café",
+    name: "Spanish Latte",
+    category: "A familiar favourite",
+    image: "client-spanish-latte",
+    alt: "Layered espresso and milk in a glass at Twitch Cafe",
   },
   {
-    name: "Butter Cake",
-    category: "A familiar favourite",
-    image: "butter-cake",
-    alt: "Golden homemade butter cake on a wooden board",
+    name: "Dirty Latte",
+    category: "Something a little different",
+    image: "client-dirty-latte",
+    alt: "A layered coffee held against the café’s green wall",
   },
 ] satisfies { name: string; category: string; image: PhotoKey; alt: string }[];
 
@@ -77,7 +53,7 @@ export const menu = [
   {
     id: "espresso",
     label: "Espresso & filter",
-    image: "pour-over",
+    image: "client-latte-and-shadow",
     intro:
       "Your daily ritual, thoughtfully prepared. We choose beans from The Hub Coffee Roasters, exploring the character of every cup.",
     items: [
@@ -97,7 +73,7 @@ export const menu = [
   {
     id: "signature",
     label: "Signature drinks",
-    image: "tiramisu-latte",
+    image: "client-signature-drink",
     intro:
       "A familiar cup, with a little Twitch character. Come curious and find a new favourite.",
     items: [
@@ -192,3 +168,26 @@ export const spacePhotos = [
     alt: "A guest enjoying a quiet moment at the window",
   },
 ] satisfies { image: PhotoKey; alt: string }[];
+
+export const coffeeMoments = [
+  {
+    image: "client-coffee-beans",
+    label: "Selected beans",
+    alt: "Bags of The Hub coffee beans on a wooden table at Twitch Cafe",
+  },
+  {
+    image: "client-latte-art",
+    label: "Latte art",
+    alt: "A latte with leaf-shaped milk art beside a small green plant",
+  },
+  {
+    image: "client-sunlit-latte",
+    label: "The daily ritual",
+    alt: "A freshly made latte in warm sunlight",
+  },
+  {
+    image: "client-coffee-preparation",
+    label: "A little discovery",
+    alt: "A coffee being finished with a garnish at Twitch Cafe",
+  },
+] satisfies { image: PhotoKey; label: string; alt: string }[];

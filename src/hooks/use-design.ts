@@ -1,23 +1,10 @@
-import { createContext, useContext } from 'react'
-import type { Design } from '@/data/cafe'
+import type { Design } from "@/data/cafe";
 
-export type AppearanceMode = 'light' | 'dark'
-export type DesignSearch = { design?: Design }
-export type Appearance = {
-  design: Design
-  linkSearch: DesignSearch
-  ready: boolean
-  notice: string
-  setMode: (mode: AppearanceMode) => void
+// The approved design is fixed on the server and client. Old URL selections,
+// browser colour preferences, and saved light-mode choices cannot override it.
+export function useDesign(): Design {
+  return "nocturne";
 }
-export const AppearanceContext = createContext<Appearance | null>(null)
-
-export function useAppearance(): Appearance {
-  const appearance = useContext(AppearanceContext)
-  if (!appearance) throw new Error('Appearance controls must be inside the site appearance provider.')
-  return appearance
+export function useDesignSearch(): Record<string, never> {
+  return {};
 }
-export function useDesign(): Design { return useAppearance().design }
-// Only forward an explicit legacy design selection. Ordinary navigation follows
-// the saved/device appearance without pinning a transient device choice in links.
-export function useDesignSearch(): DesignSearch { return useAppearance().linkSearch }

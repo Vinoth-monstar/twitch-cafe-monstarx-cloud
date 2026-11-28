@@ -1,4 +1,4 @@
-import { LocalizedMain } from '@/components/LocalizedMain';
+import { LocalizedMain } from "@/components/LocalizedMain";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowDown } from "lucide-react";
@@ -19,18 +19,18 @@ export function MenuPage() {
     <LocalizedMain id="main" className="menu-page">
       <section className="menu-intro page-wrap">
         <div>
-          <Eyebrow>{t('Your usual, or something new')}</Eyebrow>
+          <Eyebrow>{t("Your usual, or something new")}</Eyebrow>
           <h1>
-            {t('Good things,')}
+            {t("Good things,")}
             <br />
-            <em>{t('by the cup.')}</em>
+            <em>{t("by the cup.")}</em>
             <br />
-            {t('And the plate.')}
+            {t("And the plate.")}
           </h1>
           <p>
-            {t('From your first coffee to one more slice.')}
+            {t("From your first coffee to one more slice.")}
             <br />
-            {t('Find something that feels like you.')}
+            {t("Find something that feels like you.")}
           </p>
           <Link
             to="/menu"
@@ -38,13 +38,13 @@ export function MenuPage() {
             hash="menu-selection"
             className="text-link"
           >
-            {t('Take a look')} <ArrowDown size={15} />
+            {t("Take a look")} <ArrowDown size={15} />
           </Link>
         </div>
         <div className="menu-intro-photo">
           <Photo
-            image="tiramisu-latte"
-            alt="Our Tiramisu Latte with cocoa and a biscuit"
+            image="client-coffee-and-cookie"
+            alt="A latte and a cookie served on a wooden board"
             priority
           />
           <span className="image-note">A little indulgence never hurt.</span>
@@ -76,12 +76,17 @@ export function MenuPage() {
           ))}
         </div>
         <p className="menu-availability">
-          {t('Prepared with care. Selections vary with the day — ask us what’s available.')}
+          {t(
+            "Prepared with care. Selections vary with the day — ask us what’s available.",
+          )}
         </p>
         <div aria-live="polite" className="sr-only">
           {selected === "all"
-            ? t('Showing all menu categories')
-            : t('Showing {category}').replace('{category}', t(visible[0]?.label ?? ''))}
+            ? t("Showing all menu categories")
+            : t("Showing {category}").replace(
+                "{category}",
+                t(visible[0]?.label ?? ""),
+              )}
         </div>
         <div key={selected} className="menu-category-reveal">
           {visible.map((category) => (
@@ -96,7 +101,10 @@ export function MenuPage() {
                 <p>{t(category.intro)}</p>
                 <Photo
                   image={category.image}
-                  alt={t('{category} at Twitch Cafe').replace('{category}', t(category.label))}
+                  alt={t("{category} at Twitch Cafe").replace(
+                    "{category}",
+                    t(category.label),
+                  )}
                 />
               </div>
               <div className="menu-items">

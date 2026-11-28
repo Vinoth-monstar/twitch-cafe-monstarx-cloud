@@ -179,4 +179,13 @@ export const publicTranslations: Record<string, [string, string, string]> = {
   'Butter Cake': ['Kek Mentega', '黄油蛋糕', 'வெண்ணெய் கேக்'], 'Shio Pan · Japanese Salt Bun': ['Shio Pan · Roti Garam Jepun', 'Shio Pan · 日式盐面包', 'ஷியோ பான் · ஜப்பானிய உப்பு ரொட்டி'],
   'Cranberry Bagel with Cream Cheese': ['Bagel Kranberi dengan Keju Krim', '蔓越莓奶油芝士贝果', 'கிரீம் சீஸுடன் கிரான்பெரி பேகல்'],
   'Cinnamon Bagel with Butter': ['Bagel Kayu Manis dengan Mentega', '肉桂黄油贝果', 'வெண்ணெயுடன் இலவங்கப்பட்டை பேகல்'],
+  "Coffee, up close": ["", "", "காபியை நெருக்கமாகப் பாருங்கள்"],
+  "Your cup. Our craft.": ["", "", "உங்கள் கோப்பை. எங்கள் கைவண்ணம்."],
+  "From the beans we choose to the final pour, coffee is what brings us together.": ["", "", "நாங்கள் தேர்ந்தெடுக்கும் காபிக் கொட்டைகள் முதல் இறுதியாக ஊற்றும் தருணம் வரை, காபியே நம்மை ஒன்றிணைக்கிறது."],
+  "Explore our coffee": ["", "", "எங்கள் காபி வகைகளைப் பாருங்கள்"],
+  "Selected beans": ["", "", "தேர்ந்தெடுக்கப்பட்ட காபிக் கொட்டைகள்"],
+  "Latte art": ["", "", "லாட்டே கலை"],
+  "The daily ritual": ["", "", "அன்றாட வழக்கம்"],
+  "A little discovery": ["", "", "ஒரு சிறிய புதிய அனுபவம்"],
+  "Thoughtfully prepared. Every day.": ["", "", "அக்கறையுடன் தயாரிக்கப்படுகிறது. ஒவ்வொரு நாளும்."],
 }

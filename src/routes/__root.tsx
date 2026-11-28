@@ -8,21 +8,12 @@ import {
 } from "@tanstack/react-router";
 import { seoConfig, seoHead } from "@/lib/monstarx/seo";
 import { Site } from "@/components/Site";
-import { AppearanceProvider } from "@/components/AppearanceProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
-import { LocalizedMain } from '@/components/LocalizedMain';
-import type { Design } from "@/data/cafe";
+import { LocalizedMain } from "@/components/LocalizedMain";
 import appCss from "../styles.css?url";
 import cloudCss from "../cloud-features.css?url";
 export const Route = createRootRoute({
-  validateSearch: (search: Record<string, unknown>): { design?: Design } => ({
-    design:
-      search.design === "forest" ||
-      search.design === "atelier" ||
-      search.design === "nocturne"
-        ? search.design
-        : undefined,
-  }),
+  validateSearch: () => ({}),
   head: (ctx) => {
     const seo = seoHead(ctx);
     return {
@@ -30,8 +21,15 @@ export const Route = createRootRoute({
       links: [
         ...seo.links,
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
-        { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-        { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=DM+Sans:wght@400;500;600&display=swap" },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossOrigin: "anonymous",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=DM+Sans:wght@400;500;600&display=swap",
+        },
         { rel: "stylesheet", href: appCss },
         { rel: "stylesheet", href: cloudCss },
         {
@@ -48,11 +46,15 @@ export const Route = createRootRoute({
 });
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang={seoConfig.locale || "en"}>
+    <html
+      lang={seoConfig.locale || "en"}
+      data-design="nocturne"
+      style={{ colorScheme: "dark" }}
+    >
       <head>
         <HeadContent />
       </head>
-      <body className="min-h-screen bg-white text-neutral-900 antialiased">
+      <body className="min-h-screen antialiased">
         {children}
         <Scripts />
       </body>
@@ -62,11 +64,9 @@ function RootDocument({ children }: { children: ReactNode }) {
 function RootLayout() {
   return (
     <LanguageProvider>
-      <AppearanceProvider>
-        <Site>
-          <Outlet />
-        </Site>
-      </AppearanceProvider>
+      <Site>
+        <Outlet />
+      </Site>
     </LanguageProvider>
   );
 }

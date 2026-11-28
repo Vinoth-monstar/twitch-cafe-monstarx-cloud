@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Menu as MenuIcon, Moon, Sun, X } from "lucide-react";
+import { ArrowUpRight, Menu as MenuIcon, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { cafe, designs, navigation } from "@/data/cafe";
+import { cafe, navigation } from "@/data/cafe";
 import type { Design } from "@/data/cafe";
 import { ExternalLink, PageLink, Photo } from "./ui";
-import { useAppearance, useDesign, useDesignSearch } from "@/hooks/use-design";
-import { LocalizedMain } from './LocalizedMain';
+import { useDesign, useDesignSearch } from "@/hooks/use-design";
+import { LocalizedMain } from "./LocalizedMain";
 import { LanguageSelector, useLanguage } from "./LanguageProvider";
 
 export function Site({ children }: { children: ReactNode }) {
@@ -14,58 +14,31 @@ export function Site({ children }: { children: ReactNode }) {
   const { t } = useLanguage();
   return (
     <div className="site" data-design={design}>
-        <a className="skip-link" href="#main">
-          {t('Skip to content')}
-        </a>
-        <Header design={design} />
-        {children}
-        <Footer design={design} />
-        <DesignSwitcher design={design} />
+      <a className="skip-link" href="#main">
+        {t("Skip to content")}
+      </a>
+      <Header />
+      {children}
+      <Footer design={design} />
     </div>
   );
 }
 
-function AppearanceToggle() {
-  const { t } = useLanguage();
-  const { design, ready, setMode } = useAppearance();
-  const dark = design === "nocturne";
-  return (
-    <button
-      type="button"
-      className="appearance-toggle icon-button"
-      role="switch"
-      aria-checked={dark}
-      aria-label={t('Dark mode')}
-      title={
-        dark
-          ? t('Switch to light mode · Forest')
-          : t('Switch to dark mode · Nocturne')
-      }
-      disabled={!ready}
-      onClick={() => setMode(dark ? "light" : "dark")}
-    >
-      {dark ? (
-        <Sun size={19} strokeWidth={1.5} aria-hidden="true" />
-      ) : (
-        <Moon size={19} strokeWidth={1.5} aria-hidden="true" />
-      )}
-    </button>
-  );
-}
-
-function Header({ design }: { design: Design }) {
+function Header() {
   const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const trigger = useRef<HTMLButtonElement>(null);
   const drawer = useRef<HTMLDivElement>(null);
   const designSearch = useDesignSearch();
-  const home = design === "atelier" ? "/atelier" : "/";
+  const home = "/";
   useEffect(() => {
     if (!open) return;
     const oldOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const focusable = () =>
-      drawer.current?.querySelectorAll<HTMLElement>("a,button:not(:disabled),select:not(:disabled)");
+      drawer.current?.querySelectorAll<HTMLElement>(
+        "a,button:not(:disabled),select:not(:disabled)",
+      );
     focusable()?.[0]?.focus();
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -125,11 +98,10 @@ function Header({ design }: { design: Design }) {
         <div className="header-actions">
           <LanguageSelector />
           <Link to="/account" search={designSearch} className="account-link">
-            {t('My account')}
+            {t("My account")}
           </Link>
-          <AppearanceToggle />
           <Link to="/visit" search={designSearch} className="header-visit">
-            {t('Come on over')} <ArrowUpRight size={16} aria-hidden="true" />
+            {t("Come on over")} <ArrowUpRight size={16} aria-hidden="true" />
           </Link>
         </div>
         <button
@@ -185,10 +157,6 @@ function Header({ design }: { design: Design }) {
               <ArrowUpRight size={24} />
             </Link>
           ))}
-          <div className="mobile-appearance">
-            <span>{t('Make yourself at home')}</span>
-            <AppearanceToggle />
-          </div>
           <LanguageSelector />
           <p>3 Two Square · Petaling Jaya</p>
         </div>
@@ -203,13 +171,13 @@ function Footer({ design }: { design: Design }) {
     <LocalizedMain as="footer" className="site-footer">
       <div className="footer-invitation page-wrap">
         <div>
-          <p className="eyebrow">{t('Your next coffee is waiting')}</p>
+          <p className="eyebrow">{t("Your next coffee is waiting")}</p>
           <h2>
             See you at <em>Twitch.</em>
           </h2>
         </div>
         <PageLink to="/visit" design={design}>
-          {t('Find your way here')}
+          {t("Find your way here")}
         </PageLink>
       </div>
       <div className="footer-main page-wrap">
@@ -221,7 +189,7 @@ function Footer({ design }: { design: Design }) {
           </p>
         </div>
         <div>
-          <span className="footer-label">{t('Find us')}</span>
+          <span className="footer-label">{t("Find us")}</span>
           <address>
             {cafe.address.map((line) => (
               <span key={line}>
@@ -232,7 +200,7 @@ function Footer({ design }: { design: Design }) {
           </address>
         </div>
         <div>
-          <span className="footer-label">{t('Stay connected')}</span>
+          <span className="footer-label">{t("Stay connected")}</span>
           <ExternalLink href={cafe.instagram}>Instagram</ExternalLink>
           <ExternalLink href={cafe.facebook}>Facebook</ExternalLink>
         </div>
@@ -240,42 +208,8 @@ function Footer({ design }: { design: Design }) {
       <div className="footer-bottom page-wrap">
         <span>© Twitch Cafe</span>
         <span>Independent. Locally rooted. Made with heart.</span>
-        <a href="#main">{t('Back to top ↑')}</a>
+        <a href="#main">{t("Back to top ↑")}</a>
       </div>
     </LocalizedMain>
-  );
-}
-
-function DesignSwitcher({ design }: { design: Design }) {
-  const { t } = useLanguage();
-  const { notice } = useAppearance();
-  return (
-    <>
-      <nav
-        className="design-switcher"
-        aria-label={t('Explore website design directions')}
-      >
-        <span className="switcher-label">{t('THE COLLECTION')}</span>
-        {designs.map((item) => (
-          <Link
-            key={item.id}
-            to={item.path}
-            search={{ design: item.id }}
-            aria-current={design === item.id ? "page" : undefined}
-            className={design === item.id ? "selected" : ""}
-            title={t(item.title)}
-          >
-            <span className={`design-dot dot-${item.id}`} />
-            <span className="design-number">{item.number}</span>
-            <span>{item.name}</span>
-          </Link>
-        ))}
-      </nav>
-      {notice && (
-        <p className="appearance-notice" role="status">
-          {t(notice)}
-        </p>
-      )}
-    </>
   );
 }
